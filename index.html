@@ -1,0 +1,1081 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RegNavi｜マンション管理規約 改正対応BPO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: oklch(98.5% 0.004 90);
+    --bg-alt: oklch(96% 0.006 85);
+    --paper: oklch(99.5% 0.003 90);
+    --ink: oklch(18% 0.012 260);
+    --ink-2: oklch(32% 0.012 260);
+    --ink-3: oklch(48% 0.012 260);
+    --rule: oklch(84% 0.008 260);
+    --rule-strong: oklch(55% 0.02 260);
+    --indigo: oklch(36% 0.09 255);
+    --indigo-dark: oklch(27% 0.08 255);
+    --vermilion: oklch(55% 0.16 35);
+    --ok: oklch(48% 0.12 155);
+    --warn: oklch(58% 0.14 50);
+    --sans: "Noto Sans JP", system-ui, sans-serif;
+    --serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    --mono: "Inter", ui-monospace, monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family: var(--sans);
+    font-feature-settings: "palt";
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+  .wrap-narrow{max-width:880px;margin:0 auto;padding:0 32px}
+
+  /* ===== Header ===== */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background: color-mix(in oklab, var(--bg) 92%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+  header.site .inner{
+    display:flex;align-items:center;justify-content:space-between;
+    height:68px;
+  }
+  .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:inherit}
+  .brand .mark{
+    font-family:var(--serif);font-weight:900;letter-spacing:.02em;font-size:22px;
+  }
+  .brand .mark em{font-style:normal;color:var(--indigo)}
+  .brand .sub{font-size:11px;color:var(--ink-3);letter-spacing:.12em}
+  .nav{display:flex;gap:28px;align-items:center}
+  .nav a{color:var(--ink-2);text-decoration:none;font-size:13px;letter-spacing:.04em}
+  .nav a:hover{color:var(--indigo)}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:12px 22px;border-radius:2px;
+    background:var(--ink);color:var(--paper);
+    text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.06em;
+    border:1px solid var(--ink);
+    transition:.15s ease;
+  }
+  .btn:hover{background:var(--indigo);border-color:var(--indigo)}
+  .btn.primary{background:var(--indigo);border-color:var(--indigo)}
+  .btn.primary:hover{background:var(--indigo-dark);border-color:var(--indigo-dark)}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--paper)}
+  .btn .arrow{font-family:var(--mono);font-weight:500}
+
+  @media (max-width:720px){
+    .nav{display:none}
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    padding: 88px 0 96px;
+    border-bottom:1px solid var(--rule);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--rule) 55%, transparent) 1px, transparent 1px);
+    background-size: calc(100%/12) 100%;
+    mask-image: linear-gradient(to bottom, black, transparent 90%);
+    opacity:.5;
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative}
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:12px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.14em;
+    color:var(--indigo);font-weight:500;
+    margin-bottom:32px;
+  }
+  .hero-eyebrow .dot{width:6px;height:6px;background:var(--vermilion);border-radius:50%;display:inline-block}
+  .hero-eyebrow .sep{color:var(--rule-strong)}
+  .hero h1{
+    font-family:var(--serif);font-weight:700;
+    font-size: clamp(34px, 5.4vw, 64px);
+    line-height:1.25;
+    letter-spacing:.01em;
+    margin:0 0 28px;
+    max-width:900px;
+  }
+  .hero h1 .accent{
+    background: linear-gradient(transparent 66%, color-mix(in oklab, var(--vermilion) 22%, transparent) 66%);
+    padding: 0 .05em;
+  }
+  .hero .sub{
+    font-size: clamp(16px, 1.5vw, 19px);
+    color:var(--ink-2);max-width:700px;
+    margin:0 0 44px;line-height:1.9;
+  }
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .hero-note{
+    font-size:12px;color:var(--ink-3);margin-top:20px;
+    font-family:var(--mono);letter-spacing:.04em;
+  }
+
+  .hero-stats{
+    margin-top:72px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+  }
+  .hero-stats .s{
+    padding:24px 24px 22px;
+    border-right:1px solid var(--rule);
+  }
+  .hero-stats .s:last-child{border-right:none}
+  .hero-stats .label{
+    font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+    color:var(--ink-3);text-transform:uppercase;
+  }
+  .hero-stats .val{
+    font-family:var(--serif);font-weight:700;
+    font-size:28px;margin-top:6px;line-height:1.2;
+    color:var(--ink);
+  }
+  .hero-stats .val em{font-style:normal;color:var(--indigo);font-size:38px}
+  .hero-stats .cap{font-size:11px;color:var(--ink-3);margin-top:4px;letter-spacing:.02em}
+  @media (max-width:720px){
+    .hero{padding:56px 0 64px}
+    .hero-stats{grid-template-columns:repeat(2,1fr)}
+    .hero-stats .s{border-bottom:1px solid var(--rule)}
+    .hero-stats .s:nth-child(2){border-right:none}
+  }
+
+  /* ===== Section scaffolding ===== */
+  section.sec{padding:96px 0;border-bottom:1px solid var(--rule);position:relative}
+  section.sec.alt{background:var(--bg-alt)}
+  .sec-head{display:flex;align-items:flex-start;gap:40px;margin-bottom:56px}
+  .sec-head .num{
+    font-family:var(--mono);font-size:12px;letter-spacing:.18em;
+    color:var(--indigo);font-weight:600;
+    padding-top:14px;white-space:nowrap;
+    border-top:2px solid var(--indigo);
+    min-width:80px;
+  }
+  .sec-head .title{
+    font-family:var(--serif);font-weight:700;
+    font-size: clamp(28px,3.2vw,40px);
+    line-height:1.35;margin:0 0 10px;letter-spacing:.01em;
+  }
+  .sec-head .lede{color:var(--ink-2);max-width:640px;margin:0;line-height:1.9}
+  @media (max-width:720px){
+    .sec-head{flex-direction:column;gap:16px;margin-bottom:40px}
+    section.sec{padding:64px 0}
+  }
+
+  /* ===== Trust ===== */
+  .trust-grid{
+    display:grid;grid-template-columns: 1.1fr .9fr;gap:64px;
+    align-items:start;
+  }
+  .founder-card{
+    background:var(--paper);border:1px solid var(--rule);
+    padding:40px;
+  }
+  .founder-card .role{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+    color:var(--vermilion);font-weight:500;margin-bottom:14px;
+  }
+  .founder-card .name{
+    font-family:var(--serif);font-weight:700;
+    font-size:28px;line-height:1.3;margin:0 0 4px;
+  }
+  .founder-card .name .en{
+    font-family:var(--mono);font-size:13px;color:var(--ink-3);
+    font-weight:500;letter-spacing:.1em;margin-left:10px;
+  }
+  .founder-card .company{
+    font-size:13px;color:var(--ink-3);margin-bottom:24px;
+    padding-bottom:20px;border-bottom:1px solid var(--rule);
+  }
+  .founder-card h4{
+    font-family:var(--sans);font-weight:700;font-size:12px;
+    letter-spacing:.12em;color:var(--ink);margin:20px 0 8px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .founder-card h4::before{
+    content:"";width:14px;height:1px;background:var(--indigo);
+  }
+  .founder-card p{font-size:14px;line-height:1.9;color:var(--ink-2);margin:0}
+
+  .portrait{
+    aspect-ratio: 4/5;
+    background: var(--bg-alt);
+    border:1px solid var(--rule);
+    max-width:360px;margin-bottom:24px;
+    overflow:hidden;position:relative;
+  }
+  .portrait img{
+    width:100%;height:100%;object-fit:cover;object-position:center 30%;
+    display:block;filter:saturate(.96) contrast(1.02);
+  }
+  .portrait .cap{
+    position:absolute;left:16px;bottom:14px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+    color:var(--paper);
+    background: color-mix(in oklab, var(--ink) 70%, transparent);
+    padding:4px 10px;backdrop-filter: blur(4px);
+  }
+
+  .credentials{list-style:none;padding:0;margin:0}
+  .credentials li{
+    display:grid;grid-template-columns: 80px 1fr;gap:24px;
+    padding:18px 0;border-top:1px solid var(--rule);
+  }
+  .credentials li:last-child{border-bottom:1px solid var(--rule)}
+  .credentials .k{
+    font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+    color:var(--ink-3);padding-top:2px;
+  }
+  .credentials .v{font-size:14px;color:var(--ink);line-height:1.8}
+  .credentials .v strong{color:var(--indigo);font-weight:700}
+
+  .trust-highlight{
+    margin-top:48px;
+    background:var(--ink);color:var(--paper);
+    padding:40px 48px;
+    display:grid;grid-template-columns: auto 1fr auto;
+    gap:48px;align-items:center;
+    border-left:4px solid var(--vermilion);
+  }
+  .trust-highlight .kicker{
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;
+    color: oklch(75% 0.05 255);
+  }
+  .trust-highlight .statement{
+    font-family:var(--serif);font-weight:500;font-size:18px;
+    line-height:1.7;margin:6px 0 0;
+    color:var(--paper);
+  }
+  .trust-highlight .date{
+    font-family:var(--mono);font-size:13px;color: oklch(75% 0.05 255);
+    text-align:right;
+  }
+  .trust-highlight .date strong{color:var(--paper);font-size:20px;display:block}
+
+  @media (max-width:900px){
+    .trust-grid{grid-template-columns:1fr;gap:40px}
+    .trust-highlight{grid-template-columns:1fr;gap:16px;padding:28px}
+    .trust-highlight .date{text-align:left}
+  }
+
+  /* ===== Before/After ===== */
+  .ba-table{
+    width:100%;border-collapse:collapse;
+    background:var(--paper);
+    border:1px solid var(--rule);
+  }
+  .ba-table thead th{
+    text-align:left;padding:20px 24px;
+    font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.08em;
+    border-bottom:1px solid var(--rule);
+    background:var(--bg-alt);
+  }
+  .ba-table thead th.before{color:var(--ink-3)}
+  .ba-table thead th.after{color:var(--indigo);background:color-mix(in oklab, var(--indigo) 6%, var(--paper))}
+  .ba-table thead .tag{
+    display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+    padding:2px 8px;border:1px solid currentColor;margin-right:10px;opacity:.7;
+  }
+  .ba-table td{
+    padding:22px 24px;vertical-align:top;
+    font-size:14px;line-height:1.8;
+    border-bottom:1px solid var(--rule);
+  }
+  .ba-table tr:last-child td{border-bottom:none}
+  .ba-table td.cat{
+    font-family:var(--serif);font-weight:700;font-size:15px;
+    color:var(--ink);width:180px;
+    background:var(--bg-alt);
+    border-right:1px solid var(--rule);
+  }
+  .ba-table td.before{color:var(--ink-3)}
+  .ba-table td.after{
+    color:var(--ink);
+    background: color-mix(in oklab, var(--indigo) 3%, var(--paper));
+    font-weight:500;
+  }
+  .ba-table td.after strong{color:var(--indigo)}
+  @media (max-width:760px){
+    .ba-table thead{display:none}
+    .ba-table, .ba-table tbody, .ba-table tr, .ba-table td{display:block;width:auto}
+    .ba-table tr{border-bottom:1px solid var(--rule);padding:16px 0}
+    .ba-table tr:last-child{border-bottom:none}
+    .ba-table td{border:none;padding:8px 20px}
+    .ba-table td.cat{border:none;width:auto;background:transparent;padding-top:16px}
+    .ba-table td.before::before{content:"導入前　";font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--ink-3)}
+    .ba-table td.after::before{content:"導入後　";font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--indigo)}
+  }
+
+  /* ===== Steps ===== */
+  .steps{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    margin-top:48px;
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+  }
+  .step{
+    padding:36px 36px 40px;
+    border-right:1px solid var(--rule);
+    position:relative;background:var(--paper);
+  }
+  .step:last-child{border-right:none}
+  .step .num{
+    font-family:var(--mono);font-size:11px;letter-spacing:.18em;
+    color:var(--indigo);font-weight:600;
+  }
+  .step .num .big{
+    font-family:var(--serif);font-size:56px;font-weight:900;line-height:1;
+    color:var(--ink);display:block;margin-top:4px;letter-spacing:-.02em;
+  }
+  .step h3{
+    font-family:var(--serif);font-weight:700;font-size:20px;
+    margin:20px 0 12px;line-height:1.5;
+  }
+  .step p{font-size:13px;color:var(--ink-2);line-height:1.9;margin:0}
+  .step .meta{
+    margin-top:20px;padding-top:16px;border-top:1px dashed var(--rule);
+    font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;
+  }
+  @media (max-width:760px){
+    .steps{grid-template-columns:1fr}
+    .step{border-right:none;border-bottom:1px solid var(--rule)}
+    .step:last-child{border-bottom:none}
+  }
+
+  /* ===== Deliverables ===== */
+  .deliv{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:0;
+    border:1px solid var(--rule);background:var(--paper);
+  }
+  .deliv .d{
+    padding:36px 40px;
+    border-right:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    position:relative;
+  }
+  .deliv .d:nth-child(2n){border-right:none}
+  .deliv .d:nth-child(n+3){}
+  .deliv .d:nth-last-child(-n+2){border-bottom:none}
+  .deliv .idx{
+    font-family:var(--serif);font-weight:900;font-size:48px;
+    color:var(--indigo);line-height:1;letter-spacing:-.02em;
+    margin-bottom:16px;
+  }
+  .deliv .ext{
+    display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+    color:var(--ink-3);border:1px solid var(--rule-strong);
+    padding:2px 8px;margin-left:12px;vertical-align:middle;
+  }
+  .deliv h3{
+    font-family:var(--serif);font-weight:700;font-size:20px;
+    margin:0 0 10px;line-height:1.5;
+  }
+  .deliv p{font-size:13px;color:var(--ink-2);line-height:1.8;margin:0}
+  @media (max-width:720px){
+    .deliv{grid-template-columns:1fr}
+    .deliv .d{border-right:none}
+    .deliv .d:nth-last-child(2){border-bottom:1px solid var(--rule)}
+  }
+
+  /* ===== Pricing ===== */
+  .price-wrap{
+    display:grid;grid-template-columns: 1.3fr .7fr;gap:32px;
+    align-items:stretch;
+  }
+  .price-main{
+    background:var(--paper);border:1px solid var(--rule);
+    padding:48px;position:relative;
+  }
+  .price-main .planlabel{
+    font-family:var(--mono);font-size:11px;letter-spacing:.18em;
+    color:var(--ink-3);font-weight:600;
+  }
+  .price-main h3{
+    font-family:var(--serif);font-weight:700;font-size:32px;
+    margin:6px 0 24px;letter-spacing:.02em;
+  }
+  .price-main .amount{
+    display:flex;align-items:baseline;gap:8px;
+    padding:24px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    margin-bottom:28px;
+  }
+  .price-main .amount .yen{font-family:var(--serif);font-size:20px;color:var(--ink-2)}
+  .price-main .amount .num{
+    font-family:var(--serif);font-weight:900;
+    font-size: clamp(56px, 6vw, 88px);line-height:1;letter-spacing:-.02em;
+    color:var(--ink);
+  }
+  .price-main .amount .unit{
+    font-family:var(--sans);font-weight:500;font-size:15px;color:var(--ink-2);
+    margin-left:8px;
+  }
+  .price-main .amount .tax{
+    font-family:var(--mono);font-size:11px;color:var(--ink-3);
+    letter-spacing:.1em;margin-left:6px;
+  }
+  .price-list{list-style:none;margin:0;padding:0}
+  .price-list li{
+    display:grid;grid-template-columns: 24px 1fr;gap:14px;
+    padding:10px 0;font-size:14px;color:var(--ink-2);line-height:1.7;
+  }
+  .price-list li .check{
+    font-family:var(--mono);color:var(--ok);font-weight:700;
+    padding-top:2px;
+  }
+  .price-aside{
+    display:flex;flex-direction:column;gap:16px;
+  }
+  .trial-badge{
+    background: linear-gradient(180deg, var(--indigo) 0%, var(--indigo-dark) 100%);
+    color:var(--paper);padding:32px 28px;
+    flex:1;display:flex;flex-direction:column;justify-content:space-between;
+    position:relative;overflow:hidden;
+  }
+  .trial-badge::before{
+    content:"";position:absolute;top:-40px;right:-40px;
+    width:140px;height:140px;border:1px solid color-mix(in oklab, white 20%, transparent);
+    border-radius:50%;
+  }
+  .trial-badge::after{
+    content:"";position:absolute;top:-20px;right:-20px;
+    width:100px;height:100px;border:1px solid color-mix(in oklab, white 30%, transparent);
+    border-radius:50%;
+  }
+  .trial-badge .eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.18em;
+    color: color-mix(in oklab, white 75%, transparent);
+  }
+  .trial-badge h4{
+    font-family:var(--serif);font-weight:700;font-size:26px;
+    margin:10px 0 8px;line-height:1.4;
+  }
+  .trial-badge .free{
+    font-family:var(--serif);font-size:48px;font-weight:900;
+    letter-spacing:.02em;
+  }
+  .trial-badge .cond{font-size:12px;opacity:.85;line-height:1.8;margin-top:12px}
+  .trial-badge .deadline{
+    margin-top:20px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;
+    padding-top:16px;border-top:1px solid color-mix(in oklab, white 25%, transparent);
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .trial-badge .deadline strong{font-size:18px;color:var(--paper);font-weight:700}
+
+  .price-option{
+    background:var(--paper);border:1px solid var(--rule);
+    padding:24px 28px;
+  }
+  .price-option h5{
+    font-family:var(--serif);font-weight:700;font-size:15px;
+    margin:0 0 8px;
+  }
+  .price-option .opt{
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-size:13px;color:var(--ink-2);padding:6px 0;
+  }
+  .price-option .opt .p{font-family:var(--mono);color:var(--ink);font-weight:600}
+  .price-option .note{
+    font-size:11px;color:var(--ink-3);margin-top:10px;
+    padding-top:10px;border-top:1px dashed var(--rule);line-height:1.7;
+  }
+  @media (max-width:900px){
+    .price-wrap{grid-template-columns:1fr}
+    .price-main{padding:32px}
+  }
+
+  /* ===== FAQ ===== */
+  .faq-grid{display:grid;grid-template-columns: 240px 1fr;gap:48px;align-items:start}
+  .faq-cats{position:sticky;top:96px}
+  .faq-cats .cat{
+    display:block;padding:14px 0;
+    font-family:var(--mono);font-size:12px;letter-spacing:.12em;
+    color:var(--ink-3);border-top:1px solid var(--rule);
+    cursor:pointer;transition:.15s;text-decoration:none;
+  }
+  .faq-cats .cat:last-of-type{border-bottom:1px solid var(--rule)}
+  .faq-cats .cat:hover,.faq-cats .cat.active{color:var(--indigo)}
+  .faq-cats .cat .count{
+    font-family:var(--mono);color:var(--ink-3);
+    float:right;font-size:11px;
+  }
+  .faq-list{margin:0;padding:0}
+  .faq-item{
+    border-top:1px solid var(--rule);
+  }
+  .faq-item:last-child{border-bottom:1px solid var(--rule)}
+  .faq-q{
+    width:100%;background:none;border:none;cursor:pointer;
+    display:grid;grid-template-columns: 40px 1fr 40px;gap:20px;
+    padding:24px 0;text-align:left;color:inherit;font-family:inherit;
+    align-items:start;
+  }
+  .faq-q .qmark{
+    font-family:var(--serif);font-weight:900;font-size:22px;
+    color:var(--indigo);line-height:1;padding-top:4px;
+  }
+  .faq-q .text{
+    font-family:var(--serif);font-weight:500;font-size:16px;
+    line-height:1.6;color:var(--ink);
+  }
+  .faq-q .cattag{
+    display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+    color:var(--ink-3);padding:2px 8px;border:1px solid var(--rule);
+    margin-bottom:10px;
+  }
+  .faq-q .toggle{
+    font-family:var(--mono);font-size:20px;font-weight:300;color:var(--ink-3);
+    text-align:right;padding-top:2px;transition:.2s;
+  }
+  .faq-item[open] .faq-q .toggle{transform:rotate(45deg);color:var(--indigo)}
+  .faq-a{
+    padding:0 20px 28px 60px;
+    font-size:14px;color:var(--ink-2);line-height:1.9;
+    max-width:760px;
+  }
+  @media (max-width:900px){
+    .faq-grid{grid-template-columns:1fr;gap:24px}
+    .faq-cats{position:static;display:flex;flex-wrap:wrap;gap:4px}
+    .faq-cats .cat{border:1px solid var(--rule);padding:6px 12px;font-size:11px}
+    .faq-cats .cat:last-of-type{border-bottom:1px solid var(--rule)}
+    .faq-a{padding-left:20px}
+    .faq-q{grid-template-columns: 24px 1fr 24px;gap:14px}
+  }
+
+  /* ===== Final CTA ===== */
+  .final{
+    background: var(--ink);
+    color:var(--paper);
+    padding: 96px 0;
+    position:relative;overflow:hidden;
+  }
+  .final::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, white 6%, transparent) 1px, transparent 1px);
+    background-size: calc(100%/8) 100%;
+    opacity:.6;
+  }
+  .final .wrap{position:relative}
+  .final .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:.18em;
+    color: oklch(75% 0.05 255);margin-bottom:24px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .final .eyebrow .dot{width:6px;height:6px;background:var(--vermilion);border-radius:50%}
+  .final h2{
+    font-family:var(--serif);font-weight:700;
+    font-size:clamp(32px,4.5vw,56px);
+    line-height:1.3;margin:0 0 28px;max-width:900px;
+  }
+  .final h2 .accent{color: oklch(85% 0.12 55)}
+  .final p.lede{
+    font-size:17px;line-height:1.9;color: oklch(85% 0.02 260);
+    max-width:660px;margin:0 0 48px;
+  }
+  .final .contact{
+    display:grid;grid-template-columns: 1fr auto;
+    gap:40px;align-items:end;
+    padding-top:40px;border-top:1px solid color-mix(in oklab, white 20%, transparent);
+  }
+  .mail-card{}
+  .mail-card .mlabel{
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;
+    color: oklch(75% 0.05 255);margin-bottom:10px;
+  }
+  .mail-card .mail{
+    font-family:var(--mono);font-weight:500;
+    font-size: clamp(22px,2.8vw,34px);
+    color:var(--paper);letter-spacing:.02em;
+    text-decoration:none;display:inline-block;
+    border-bottom:1px solid color-mix(in oklab, white 40%, transparent);
+    padding-bottom:6px;
+  }
+  .mail-card .mail:hover{border-bottom-color:var(--vermilion)}
+  .final .btn.primary{
+    background:var(--paper);color:var(--ink);border-color:var(--paper);
+    padding:18px 32px;font-size:14px;
+  }
+  .final .btn.primary:hover{background: oklch(85% 0.12 55);border-color: oklch(85% 0.12 55)}
+  @media (max-width:720px){
+    .final{padding:64px 0}
+    .final .contact{grid-template-columns:1fr;gap:24px}
+  }
+
+  /* ===== Footer ===== */
+  footer.site{
+    background: oklch(12% 0.01 260);
+    color: oklch(70% 0.01 260);
+    padding:40px 0 48px;font-size:12px;
+  }
+  footer.site .row{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  footer.site .brand{color:var(--paper)}
+  footer.site .brand .mark em{color: oklch(75% 0.12 55)}
+  footer.site .meta{font-family:var(--mono);letter-spacing:.06em}
+
+  /* ===== Reveal ===== */
+  .reveal{opacity:0;transform:translateY(12px);transition: opacity .8s ease, transform .8s ease}
+  .reveal.in{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="wrap inner">
+    <a href="#top" class="brand">
+      <span class="mark">R<em>eg</em>Navi</span>
+      <span class="sub">by DAY1, Inc.</span>
+    </a>
+    <nav class="nav">
+      <a href="#trust">DAY1について</a>
+      <a href="#service">サービス</a>
+      <a href="#deliv">納品物</a>
+      <a href="#price">料金</a>
+      <a href="cases/index.html">導入事例</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="btn primary" style="color:#fff">無料トライアル <span class="arrow">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      <span>REG-NAVI ／ 管理規約 改正対応BPO</span>
+      <span class="sep">|</span>
+      <span>令和7年改正対応</span>
+    </div>
+    <h1>
+      管理規約改正の手間を、<br>
+      <span class="accent">丸ごとお引き受け</span>します。
+    </h1>
+    <p class="sub">
+      現行規約を送るだけ。改正規約・議案書・新旧対照表・区分所有者向け説明文まで、<br>
+      必要な書類を一式、最短2営業日でお届けします。
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn primary">まず1棟、無料でお試しください <span class="arrow">→</span></a>
+      <a href="#service" class="btn ghost">サービス内容を見る</a>
+    </div>
+    <p class="hero-note">※ 初回1棟限り無料（単棟型マンション）／2026年5月末まで</p>
+
+    <div class="hero-stats">
+      <div class="s">
+        <div class="label">LEAD TIME</div>
+        <div class="val">最短 <em>2</em> 営業日</div>
+        <div class="cap">現行規約の送付からご納品まで</div>
+      </div>
+      <div class="s">
+        <div class="label">UNIT PRICE</div>
+        <div class="val"><em>¥50,000</em>／棟〜</div>
+        <div class="cap">標準プラン・税別</div>
+      </div>
+      <div class="s">
+        <div class="label">TRIAL COMPANIES</div>
+        <div class="val"><em>20</em> 社</div>
+        <div class="cap">現在トライアル参加中</div>
+      </div>
+      <div class="s">
+        <div class="label">OFFICIAL ORDERS</div>
+        <div class="val"><em>3</em> 社</div>
+        <div class="cap">正式発注済み（2026年4月時点）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST ============ -->
+<section class="sec" id="trust">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num">01 ／ 信頼</div>
+      <div>
+        <h2 class="title">DAY1とは、そして<br>代表について。</h2>
+        <p class="lede">
+          RegNaviを提供する株式会社DAY1は、不動産 × AI BPOのパイオニアとして、
+          不動産業務における多くの課題を解決していきます。
+        </p>
+      </div>
+    </div>
+
+    <div class="trust-grid">
+      <div>
+        <div class="founder-card">
+          <div class="role">FOUNDER ／ CEO</div>
+          <h3 class="name">飯田 健登<span class="en">IIDA Kento</span></h3>
+          <div class="company">株式会社DAY1 代表取締役</div>
+
+          <h4>ポジション</h4>
+          <p>不動産 × AI BPOのパイオニア。AI活用による業務効率化を軸に、管理会社の「属人化した手作業」を外部化する新しい実務モデルを構築。</p>
+
+          <h4>経歴</h4>
+          <p>金融業界を渡り歩き、様々な企業と触れる中で「魅力ある企業をもっと広げたい」という思いから、動画領域で起業。150社以上を支援してきた。</p>
+
+          <h4>RegNavi誕生のきっかけ</h4>
+          <p>動画支援の中で、とある不動産管理会社から「法律改正に伴い、大量の物件規約修正が必要で大変」という相談を受ける。自社でもAI活用による業務効率化（月30時間削減）を実践しており、その技術を規約改正業務に応用してサービス化。</p>
+        </div>
+      </div>
+
+      <div>
+                <div class="portrait">
+          <img src="assets/iida-kento.jpg" alt="飯田 健登 / 株式会社DAY1 代表取締役" />
+          <span class="cap">IIDA KENTO / DAY1 CEO</span>
+        </div>
+        <ul class="credentials">
+          <li>
+            <span class="k">2026.04</span>
+            <span class="v"><strong>良品総合管理株式会社</strong>より本発注受注</span>
+          </li>
+          <li>
+            <span class="k">現在</span>
+            <span class="v"><strong>20社</strong>トライアル参加中／<strong>3社</strong>正式発注済み</span>
+          </li>
+          <li>
+            <span class="k">実績</span>
+            <span class="v">AI活用により自社業務を<strong>月30時間</strong>削減</span>
+          </li>
+          <li>
+            <span class="k">創業来</span>
+            <span class="v">動画・マーケティング領域で<strong>150社以上</strong>を支援</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trust-highlight">
+      <div class="kicker">PRESS RELEASE ／ 2026.04</div>
+      <p class="statement">「良品総合管理株式会社」より、<br>
+        管理規約改正業務のBPOとして<strong style="color:var(--paper)">本発注</strong>をいただきました。</p>
+      <div class="date">
+        <div style="font-size:10px;letter-spacing:.16em;">CLIENT</div>
+        <strong>良品総合管理</strong>
+        <div style="font-size:10px;letter-spacing:.06em;margin-top:6px;opacity:.7;">株式会社</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICE / BEFORE-AFTER ============ -->
+<section class="sec alt" id="service">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num">02 ／ サービス</div>
+      <div>
+        <h2 class="title">担当者何十時間の仕事を、<br>数日で、均質に、外注できる。</h2>
+        <p class="lede">
+          令和7年の標準管理規約改正に伴う実務負荷を、RegNaviが丸ごと引き受けます。
+          条番号ズレの目視チェックも、属人化した作業も、すべてAI + 専任担当者の体制で均質化します。
+        </p>
+      </div>
+    </div>
+
+    <table class="ba-table">
+      <thead>
+        <tr>
+          <th style="width:180px;">比較項目</th>
+          <th class="before"><span class="tag">BEFORE</span>導入前</th>
+          <th class="after"><span class="tag">AFTER</span>RegNavi導入後</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cat">対応工数</td>
+          <td class="before">担当者が<strong>何十時間</strong>を丸ごと費やす</td>
+          <td class="after"><strong>数日以内</strong>に完成書類を納品</td>
+        </tr>
+        <tr>
+          <td class="cat">ミスリスク</td>
+          <td class="before">条番号ズレは<strong>目視チェック頼み</strong></td>
+          <td class="after">AIが参照エラーを<strong>自動検出・修正</strong></td>
+        </tr>
+        <tr>
+          <td class="cat">成果物</td>
+          <td class="before">新旧対照表のみ／書式バラバラ</td>
+          <td class="after">改正規約・議案書・説明文を<strong>一括納品</strong></td>
+        </tr>
+        <tr>
+          <td class="cat">コスト</td>
+          <td class="before">担当者人件費（機会損失）</td>
+          <td class="after"><strong>1棟 50,000円〜</strong>（税別）</td>
+        </tr>
+        <tr>
+          <td class="cat">属人化</td>
+          <td class="before">特定担当者のみが対応可能</td>
+          <td class="after">外注で均質対応／<strong>担当者の負荷ゼロ</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 3 STEPS -->
+    <div class="sec-head" style="margin-top:96px;margin-bottom:32px;">
+      <div class="num">02-A ／ 流れ</div>
+      <div>
+        <h2 class="title" style="font-size:clamp(22px,2.6vw,32px);">3ステップで、書類一式。</h2>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="num">STEP <span class="big">01</span></div>
+        <h3>現行規約をご送付</h3>
+        <p>PDF・Word・紙スキャンのいずれにも対応。現行の管理規約をメールでお送りください。面談や専用フォームの入力は不要です。</p>
+        <div class="meta">PDF / Word / SCAN</div>
+      </div>
+      <div class="step">
+        <div class="num">STEP <span class="big">02</span></div>
+        <h3>AIが改正案を作成</h3>
+        <p>国交省標準に準拠し、強行規定の漏れをゼロに。条番号のズレや参照エラーはAIが自動で検出・修正します。</p>
+        <div class="meta">MLIT 標準 ／ AI AUTO-FIX</div>
+      </div>
+      <div class="step">
+        <div class="num">STEP <span class="big">03</span></div>
+        <h3>完成書類一式をご納品</h3>
+        <p>改正規約・新旧対照表・議案書・説明文の4点を一括で納品。ご確認後、修正対応は2回まで標準料金内で承ります。</p>
+        <div class="meta">4 DOCS ／ 2 REV. INCLUDED</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DELIVERABLES ============ -->
+<section class="sec" id="deliv">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num">03 ／ 納品物</div>
+      <div>
+        <h2 class="title">必要な書類を、4点セットで。</h2>
+        <p class="lede">
+          総会資料としてそのまま使える形式で、すべてMicrosoft Word形式にてお届けします。
+          社内での共有・修正・印刷いずれもスムーズに行えます。
+        </p>
+      </div>
+    </div>
+
+    <div class="deliv">
+      <div class="d">
+        <div class="idx">01</div>
+        <h3>改正規約 全文<span class="ext">.docx</span></h3>
+        <p>物件固有の情報を統合した、令和7年改正対応の最終版。そのまま総会承認用の正文として利用可能です。</p>
+      </div>
+      <div class="d">
+        <div class="idx">02</div>
+        <h3>新旧対照表<span class="ext">.docx</span></h3>
+        <p>改正前後を3列で比較（国交省標準規約 ／ 現行 ／ 改正後）。変更の根拠がひと目で分かる実務仕様。</p>
+      </div>
+      <div class="d">
+        <div class="idx">03</div>
+        <h3>総会議案書<span class="ext">.docx</span></h3>
+        <p>そのまま使える議案書ドラフト。提案理由・改正の趣旨まで含めた、総会運営を想定した構成で納品します。</p>
+      </div>
+      <div class="d">
+        <div class="idx">04</div>
+        <h3>区分所有者向け説明文<span class="ext">.docx</span></h3>
+        <p>Q&amp;A形式の平易な解説文。法律用語に馴染みのない区分所有者にも、改正内容を理解いただける文面です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="sec alt" id="price">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num">04 ／ 料金</div>
+      <div>
+        <h2 class="title">1棟 50,000円〜。<br>5月末まで、初回1棟は無料。</h2>
+        <p class="lede">
+          単棟型マンションの標準プラン。納品物4点 + 修正対応2回まで、すべて含まれます。
+          まずは1棟、無料でお試しいただき、品質をご確認ください。
+        </p>
+      </div>
+    </div>
+
+    <div class="price-wrap">
+      <div class="price-main">
+        <div class="planlabel">STANDARD PLAN</div>
+        <h3>標準プラン</h3>
+        <div class="amount">
+          <span class="yen">¥</span>
+          <span class="num">50,000</span>
+          <span class="unit">／ 棟</span>
+          <span class="tax">(税別)</span>
+        </div>
+        <ul class="price-list">
+          <li><span class="check">✓</span><span>改正規約全文（Word）</span></li>
+          <li><span class="check">✓</span><span>新旧対照表（3列比較・Word）</span></li>
+          <li><span class="check">✓</span><span>総会議案書（Word）</span></li>
+          <li><span class="check">✓</span><span>区分所有者向け説明文（Q&amp;A形式・Word）</span></li>
+          <li><span class="check">✓</span><span>納品後の修正対応 <strong>2回まで込み</strong></span></li>
+          <li><span class="check">✓</span><span>最終チェック：弊社担当者 + 顧問弁護士による都度確認</span></li>
+        </ul>
+      </div>
+
+      <div class="price-aside">
+        <div class="trial-badge">
+          <div>
+            <div class="eyebrow">FIRST TRIAL</div>
+            <h4>初回1棟、無料。</h4>
+            <div class="free">¥ 0</div>
+            <div class="cond">単棟型マンション／1社あたり1棟まで<br>まずはメールにてご相談ください</div>
+          </div>
+          <div class="deadline">
+            <span>DEADLINE</span>
+            <strong>2026.05.31</strong>
+          </div>
+        </div>
+        <div class="price-option">
+          <h5>別料金オプション</h5>
+          <div class="opt"><span>別表・使用細則の作成</span><span class="p">+¥100,000 / 棟</span></div>
+          <div class="opt"><span>複合用途型・大規模・団地型</span><span class="p">要相談</span></div>
+          <p class="note">※ 別表・使用細則の作成には、これまでの議事録等の資料が必要になります。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num">05 ／ FAQ</div>
+      <div>
+        <h2 class="title">よくあるご質問。</h2>
+        <p class="lede">ご発注前にいただくことの多い10のご質問をまとめました。記載のない内容も、お気軽にメールでお問い合わせください。</p>
+      </div>
+    </div>
+
+    <div class="faq-grid">
+      <aside class="faq-cats" id="faqcats">
+        <a href="#" class="cat active" data-cat="すべて">すべて<span class="count">9</span></a>
+        <a href="#" class="cat" data-cat="品質・精度">品質・精度<span class="count">2</span></a>
+        <a href="#" class="cat" data-cat="対応範囲">対応範囲<span class="count">2</span></a>
+        <a href="#" class="cat" data-cat="料金・納品物">料金・納品物<span class="count">2</span></a>
+        <a href="#" class="cat" data-cat="スピード">スピード<span class="count">1</span></a>
+        <a href="#" class="cat" data-cat="信頼性">信頼性<span class="count">1</span></a>
+        <a href="#" class="cat" data-cat="データ">データ<span class="count">1</span></a>
+      </aside>
+
+      <div class="faq-list" id="faqlist">
+        <!-- Populated below -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final" id="contact">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>CONTACT ／ 無料トライアル受付中</div>
+    <h2>まず1棟、<br><span class="accent">無料で</span>お試しください。</h2>
+    <p class="lede">現行の管理規約を一通、メールでお送りいただくだけ。1営業日以内に担当者よりご連絡いたします。総会スケジュールがお決まりでしたら、併せてお知らせください。</p>
+
+    <div class="contact">
+      <div class="mail-card">
+        <div class="mlabel">CONTACT ／ MAIL ONLY</div>
+        <a href="mailto:info@web-day1.com" class="mail">info@web-day1.com</a>
+      </div>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScX9mXAQLRg6wqdAtJWVq4LPLi6TXieKSCuEpRd-bscceHJ_Q/viewform?usp=dialog" target="_blank" rel="noopener" class="btn primary">無料トライアルを申し込む <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="wrap row">
+    <div class="brand">
+      <span class="mark">R<em>eg</em>Navi</span>
+      <span class="sub" style="margin-left:10px;">by DAY1, Inc.</span>
+    </div>
+    <div class="meta">
+      <a href="https://day1deyoutube.com/company/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;margin-right:16px;">会社概要</a>
+      © 2026 DAY1, Inc. ／ info@web-day1.com
+    </div>
+  </div>
+</footer>
+
+<script>
+  // FAQ data
+  const FAQ = [
+    {cat:"品質・精度", q:"古い規約（昭和の規約・標準から外れたもの）でも対応できますか？", a:"対応できます。現行と標準の比較表を出力した後に、何を残して何を標準に合わせるかご判断いただきます。ご判断をいただき次第、正式に規約を修正します。"},
+    {cat:"品質・精度", q:"条番号ズレ・参照エラーは本当に自動修正できますか？", a:"対応できます。条番号ズレ・参照エラーの検出・修正は、AIが最も得意とする分野です。最終的には担当者が全件目視で確認してからの納品となります。"},
+    {cat:"対応範囲", q:"単棟型以外（団地型・複合用途型）にも対応できますか？", a:"対応できます。ただし、複合用途型・大規模物件・団地型は料金が異なる場合があります。まずはご相談ください。"},
+    {cat:"対応範囲", q:"紙スキャンの規約しかありませんが、受け取ってもらえますか？", a:"受け取れます。弊社でAI OCRを使用して読み取ります。ただし、目視でも判読できない部分がある場合は、対応が難しいケースがあります。"},
+    {cat:"料金・納品物", q:"別表・使用細則の作成は含まれますか？追加料金はかかりますか？", a:"作成は可能ですが、別途100,000円／棟となります。また、これまでの議事録などの資料が必要になります。"},
+    {cat:"料金・納品物", q:"修正は何回まで対応してもらえますか？", a:"原則2回までとしております。標準料金内に含まれております。"},
+    {cat:"スピード", q:"納品まで何日かかりますか？総会に間に合いますか？", a:"最短2営業日での納品が可能です。総会のスケジュールをお知らせいただければ、逆算して対応いたします。"},
+    {cat:"信頼性", q:"まだ新しいサービスのようですが、実績や最終チェック体制は？", a:"現在20社にトライアルにご参加いただいており、3社から正式に発注をいただいております。最終チェックは担当者が行い、弊社顧問弁護士も都度確認しております。"},
+    {cat:"データ", q:"提供した規約データはどう扱われますか？", a:"納品が完了次第、データは破棄いたします。保管期間・破棄プロセスについての詳細は、ご契約時にご説明いたします。"},
+  ];
+  const faqList = document.getElementById('faqlist');
+  FAQ.forEach((f, i) => {
+    const n = String(i+1).padStart(2,'0');
+    const el = document.createElement('details');
+    el.className = 'faq-item';
+    el.dataset.cat = f.cat;
+    el.innerHTML = `
+      <summary class="faq-q" style="list-style:none">
+        <span class="qmark">Q.</span>
+        <span><span class="cattag">${f.cat}</span><br><span class="text">${f.q}</span></span>
+        <span class="toggle">+</span>
+      </summary>
+      <div class="faq-a">${f.a}</div>`;
+    // prevent default summary marker
+    el.querySelector('summary').style.cursor = 'pointer';
+    faqList.appendChild(el);
+  });
+
+  // FAQ filter
+  document.querySelectorAll('#faqcats .cat').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelectorAll('#faqcats .cat').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      document.querySelectorAll('.faq-item').forEach(it => {
+        it.style.display = (cat === 'すべて' || it.dataset.cat === cat) ? '' : 'none';
+        it.open = false;
+      });
+    });
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((ents) => {
+    ents.forEach(e => { if(e.isIntersecting) e.target.classList.add('in') });
+  }, {threshold:.08});
+  document.querySelectorAll('.sec, .hero-stats, .trust-highlight, .price-wrap, .deliv, .steps, .ba-table').forEach(el => {
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+
+  // Smooth anchor
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const t = document.querySelector(id);
+        if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
+      }
+    });
+  });
+</script>
+</body>
+</html>
