@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>「担当者1人で1棟1週間」の常識を、数日に圧縮できた理由｜良品総合管理株式会社｜RegNavi 導入事例</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: oklch(98.5% 0.004 90);
+    --bg-alt: oklch(96% 0.006 85);
+    --paper: oklch(99.5% 0.003 90);
+    --ink: oklch(18% 0.012 260);
+    --ink-2: oklch(32% 0.012 260);
+    --ink-3: oklch(48% 0.012 260);
+    --rule: oklch(84% 0.008 260);
+    --rule-strong: oklch(55% 0.02 260);
+    --indigo: oklch(36% 0.09 255);
+    --indigo-dark: oklch(27% 0.08 255);
+    --vermilion: oklch(55% 0.16 35);
+    --sans: "Noto Sans JP", system-ui, sans-serif;
+    --serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    --mono: "Inter", ui-monospace, monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family: var(--sans);
+    font-feature-settings: "palt";
+    color: var(--ink);background: var(--bg);
+    line-height: 1.95;
+    -webkit-font-smoothing: antialiased;font-size:16px;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+  .wrap-narrow{max-width:760px;margin:0 auto;padding:0 32px}
+
+  /* header */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background: color-mix(in oklab, var(--bg) 92%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+  header.site .inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:inherit}
+  .brand .mark{font-family:var(--serif);font-weight:900;letter-spacing:.02em;font-size:22px}
+  .brand .mark em{font-style:normal;color:var(--indigo)}
+  .brand .sub{font-size:11px;color:var(--ink-3);letter-spacing:.12em}
+  .nav{display:flex;gap:28px;align-items:center}
+  .nav a{color:var(--ink-2);text-decoration:none;font-size:13px;letter-spacing:.04em}
+  .nav a:hover,.nav a.active{color:var(--ink);font-weight:700}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border-radius:2px;background:var(--ink);color:var(--paper);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.06em;border:1px solid var(--ink);transition:.15s}
+  .btn:hover{background:var(--indigo);border-color:var(--indigo)}
+  .btn.primary{background:var(--indigo);border-color:var(--indigo);color:#fff}
+  @media (max-width:720px){.nav{display:none}}
+
+  /* === Article hero === */
+  .article-hero{
+    padding: 56px 0 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .crumbs{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+    color:var(--ink-3);margin-bottom:36px;
+  }
+  .crumbs a{color:var(--ink-3);text-decoration:none}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{margin:0 10px;color:var(--rule-strong)}
+
+  .a-meta-row{
+    display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;
+    color:var(--ink-3);margin-bottom:24px;
+  }
+  .a-meta-row .num{
+    font-family:var(--serif);font-weight:900;font-size:18px;color:var(--vermilion);
+    letter-spacing:.02em;
+  }
+  .a-meta-row .tag{
+    padding:3px 10px;border:1px solid var(--rule-strong);color:var(--ink-2);
+  }
+  .a-meta-row .sep{color:var(--rule-strong)}
+
+  .article-hero h1{
+    font-family:var(--serif);font-weight:700;
+    font-size: clamp(32px, 4.6vw, 56px);
+    line-height:1.4;margin:0 0 28px;letter-spacing:.02em;
+    max-width:1000px;
+  }
+  .article-hero .deck{
+    font-size:18px;color:var(--ink-2);max-width:740px;line-height:1.95;margin:0 0 48px;
+    border-left:3px solid var(--indigo);padding-left:20px;
+  }
+
+  .a-info{
+    display:grid;grid-template-columns: repeat(4, 1fr);gap:0;
+    border-top:1px solid var(--rule);
+  }
+  .a-info .i{
+    padding:24px 28px 24px 0;border-right:1px solid var(--rule);
+  }
+  .a-info .i:last-child{border-right:none;padding-right:0}
+  .a-info .k{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--ink-3);text-transform:uppercase}
+  .a-info .v{font-family:var(--serif);font-weight:700;font-size:16px;margin-top:6px;line-height:1.5;color:var(--ink)}
+  @media (max-width:720px){
+    .a-info{grid-template-columns:1fr 1fr}
+    .a-info .i{padding-right:20px}
+    .a-info .i:nth-child(2){border-right:none}
+  }
+
+  /* === Lead image with logo === */
+  .lead-image{
+    margin-top:48px;
+    aspect-ratio: 21/9;
+    max-height: 360px;
+    background:
+      linear-gradient(135deg, oklch(96% 0.006 85) 0%, oklch(98% 0.004 90) 100%);
+    position:relative;overflow:hidden;
+    border:1px solid var(--rule);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .lead-image::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(transparent 49.5%, color-mix(in oklab, var(--ink) 4%, transparent) 49.5% 50.5%, transparent 50.5%),
+      linear-gradient(90deg, transparent 49.5%, color-mix(in oklab, var(--ink) 4%, transparent) 49.5% 50.5%, transparent 50.5%);
+    background-size: 80px 80px;
+    opacity:.5;
+  }
+  .lead-image .logo-stack{
+    position:relative;display:flex;flex-direction:row;align-items:center;gap:32px;
+    padding:24px;
+  }
+  .lead-image .logo-stack img{
+    width: clamp(96px, 12vw, 140px);height:auto;display:block;
+    filter: drop-shadow(0 8px 24px color-mix(in oklab, var(--ink) 14%, transparent));
+  }
+  .lead-image .logo-stack .name{
+    font-family:var(--serif);font-weight:700;font-size:20px;
+    color:var(--ink);letter-spacing:.04em;line-height:1.5;
+  }
+  .lead-image .logo-stack .name small{
+    display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+    color:var(--ink-3);font-weight:500;margin-top:6px;
+  }
+  .lead-image .ph-mark{
+    position:absolute;left:24px;top:24px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-3);
+  }
+  .lead-image .caption{
+    position:absolute;left:24px;bottom:20px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+    color: var(--ink-3);
+  }
+
+  /* === Article body === */
+  article.body{
+    padding: 96px 0 64px;
+    display:grid;grid-template-columns: 200px minmax(0, 760px) 200px;
+    gap:48px;justify-content:center;
+  }
+  /* left side: section index */
+  .toc{
+    position:sticky;top:96px;align-self:start;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  }
+  .toc .label{color:var(--ink-3);margin-bottom:16px}
+  .toc ol{list-style:none;padding:0;margin:0;border-top:1px solid var(--rule)}
+  .toc li{border-bottom:1px solid var(--rule)}
+  .toc a{
+    display:flex;gap:12px;padding:10px 0;
+    color:var(--ink-2);text-decoration:none;
+  }
+  .toc a:hover{color:var(--indigo)}
+  .toc a .n{color:var(--ink-3)}
+
+  /* right side: pull info */
+  .side{
+    position:sticky;top:96px;align-self:start;
+    font-family:var(--sans);font-size:13px;
+  }
+  .side .card{
+    border-top:2px solid var(--ink);
+    padding:18px 0 24px;
+  }
+  .side .card + .card{margin-top:32px;border-top:1px solid var(--rule)}
+  .side h4{
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--ink-3);
+    margin:0 0 12px;text-transform:uppercase;
+  }
+  .side ul{list-style:none;padding:0;margin:0}
+  .side li{padding:8px 0;border-bottom:1px dashed var(--rule);font-size:13px;color:var(--ink-2);line-height:1.7}
+  .side li:last-child{border-bottom:none}
+  .side .stat{font-family:var(--serif);font-weight:900;font-size:32px;color:var(--ink);line-height:1;letter-spacing:-.01em;margin:6px 0 4px}
+  .side .stat-label{font-size:11px;color:var(--ink-3);letter-spacing:.06em}
+
+  @media (max-width:1100px){
+    article.body{grid-template-columns: minmax(0, 760px);gap:0;padding:64px 0}
+    .toc, .side{display:none}
+  }
+
+  /* prose */
+  .prose{font-size:17px;line-height:2.05;color:var(--ink)}
+  .prose h2{
+    font-family:var(--serif);font-weight:700;font-size:28px;line-height:1.55;
+    margin:80px 0 24px;letter-spacing:.02em;
+    padding-top:32px;border-top:1px solid var(--rule);
+    position:relative;
+  }
+  .prose h2::before{
+    content: attr(data-num);
+    display:block;font-family:var(--mono);font-size:11px;letter-spacing:.18em;
+    color:var(--vermilion);font-weight:600;
+    margin-bottom:12px;
+  }
+  .prose h3{
+    font-family:var(--serif);font-weight:700;font-size:20px;line-height:1.6;
+    margin:48px 0 16px;color:var(--indigo);
+  }
+  .prose p{margin:0 0 24px}
+  .prose .lead{
+    font-family:var(--serif);font-size:18px;line-height:2;color:var(--ink-2);
+    margin-bottom:40px;
+  }
+  .prose .lead::first-letter{
+    font-family:var(--serif);font-weight:900;font-size:3.6em;
+    float:left;line-height:.85;margin: 4px 12px 0 0;color:var(--indigo);
+  }
+
+  /* QA blocks */
+  .qa{margin: 28px 0}
+  .qa .qline,.qa .aline{
+    display:grid;grid-template-columns: 56px 1fr;gap:20px;align-items:start;
+    margin-bottom:18px;
+  }
+  .qa .qline .label,.qa .aline .label{
+    font-family:var(--serif);font-weight:900;font-size:22px;line-height:1.4;
+    padding-top:2px;
+  }
+  .qa .qline .label{color:var(--ink-3)}
+  .qa .aline .label{color:var(--vermilion)}
+  .qa .qline .text{
+    font-family:var(--sans);font-size:15px;color:var(--ink-2);
+    border-bottom:1px solid var(--rule);padding-bottom:14px;line-height:1.85;
+  }
+  .qa .aline .text{font-size:17px;line-height:2;color:var(--ink)}
+  .qa .aline .text strong{
+    background: linear-gradient(transparent 66%, color-mix(in oklab, var(--vermilion) 22%, transparent) 66%);
+    font-weight:700;padding:0 .05em;
+  }
+
+  /* pull quote */
+  .pullquote{
+    margin: 48px -40px;
+    padding: 40px;
+    background: var(--bg-alt);
+    border-top:2px solid var(--ink);
+    border-bottom:2px solid var(--ink);
+    text-align:left;position:relative;
+  }
+  .pullquote::before{
+    content:"“";position:absolute;left:24px;top:8px;
+    font-family:var(--serif);font-size:120px;line-height:1;color:var(--indigo);
+    opacity:.4;
+  }
+  .pullquote .text{
+    font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.85;
+    color:var(--ink);position:relative;
+  }
+  .pullquote .who{
+    margin-top:20px;display:flex;align-items:center;gap:12px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--ink-3);
+  }
+  .pullquote .who::before{content:"";width:32px;height:1px;background:var(--rule-strong)}
+  @media (max-width:720px){.pullquote{margin: 32px -16px;padding: 28px 24px}}
+
+  /* speaker chips */
+  .speakers{
+    display:grid;grid-template-columns: 1fr 1fr;gap:16px;
+    margin: 32px 0 48px;
+  }
+  .speaker{
+    background:var(--paper);border:1px solid var(--rule);
+    padding:20px 22px;display:flex;gap:16px;align-items:flex-start;
+  }
+  .avatar{
+    width:56px;height:56px;flex-shrink:0;
+    background:
+      repeating-linear-gradient(45deg, transparent 0 6px, color-mix(in oklab, var(--rule) 60%, transparent) 6px 7px),
+      var(--bg-alt);
+    border:1px solid var(--rule);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-weight:900;font-size:20px;color:var(--ink-3);
+  }
+  .speaker .role{
+    font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--vermilion);
+  }
+  .speaker .name{
+    font-family:var(--serif);font-weight:700;font-size:16px;margin-top:2px;line-height:1.4;
+  }
+  .speaker .org{font-size:12px;color:var(--ink-3);margin-top:2px}
+  @media (max-width:600px){.speakers{grid-template-columns:1fr}}
+
+  /* compare table inline */
+  .compare{
+    margin: 36px 0 12px;
+    border:1px solid var(--rule);background:var(--paper);
+  }
+  .compare .row{
+    display:grid;grid-template-columns: 140px 1fr 1fr;
+    border-bottom:1px solid var(--rule);
+  }
+  .compare .row:last-child{border-bottom:none}
+  .compare .row.head{
+    background:var(--bg-alt);
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-3);
+  }
+  .compare .row.head > div{padding:14px 18px;border-right:1px solid var(--rule)}
+  .compare .row.head > div:last-child{border-right:none;color:var(--indigo)}
+  .compare .row > div{padding:18px;border-right:1px solid var(--rule);font-size:14px;line-height:1.8}
+  .compare .row > div:last-child{border-right:none;background:color-mix(in oklab, var(--indigo) 4%, var(--paper));font-weight:500}
+  .compare .row > .lbl{
+    font-family:var(--serif);font-weight:700;color:var(--ink);background:var(--bg-alt);
+  }
+
+  /* end card */
+  .end-mark{
+    text-align:center;margin:64px 0 48px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.4em;color:var(--ink-3);
+  }
+  .end-mark::before, .end-mark::after{
+    content:"";display:inline-block;width:60px;height:1px;background:var(--rule-strong);
+    vertical-align:middle;margin:0 16px;
+  }
+
+  /* CTA + related */
+  .article-cta{
+    background:var(--ink);color:var(--paper);
+    padding:64px 0;border-top:1px solid var(--rule);
+  }
+  .article-cta .inner{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+  .article-cta h3{font-family:var(--serif);font-weight:700;font-size:clamp(22px,2.6vw,30px);line-height:1.5;margin:0 0 8px}
+  .article-cta p{color:oklch(80% 0.02 260);margin:0;font-size:14px}
+  .article-cta .btn.primary{background:var(--paper);color:var(--ink);border-color:var(--paper);padding:18px 32px}
+  .article-cta .btn.primary:hover{background:oklch(85% 0.12 55);border-color:oklch(85% 0.12 55)}
+  @media (max-width:720px){.article-cta .inner{grid-template-columns:1fr}}
+
+  .related{padding:80px 0;border-top:1px solid var(--rule)}
+  .related h3{
+    font-family:var(--serif);font-weight:700;font-size:22px;margin:0 0 32px;
+  }
+  .back-link{
+    display:inline-flex;align-items:center;gap:14px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.14em;
+    color:var(--ink-2);text-decoration:none;
+  }
+  .back-link::before{
+    content:"";width:32px;height:1px;background:var(--ink-2);position:relative;
+  }
+  .back-link:hover{color:var(--indigo)}
+  .back-link:hover::before{background:var(--indigo)}
+
+  /* footer */
+  footer.site{background: oklch(12% 0.01 260);color: oklch(70% 0.01 260);padding:40px 0 48px;font-size:12px}
+  footer.site .row{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  footer.site .brand{color:var(--paper)}
+  footer.site .brand .mark em{color: oklch(75% 0.12 55)}
+  footer.site .meta{font-family:var(--mono);letter-spacing:.06em}
+  footer.site .meta a{color:inherit;text-decoration:none;margin-right:16px}
+
+  /* progress bar */
+  .progress{
+    position:fixed;left:0;top:0;height:2px;width:0%;
+    background:var(--vermilion);z-index:100;transition:width .1s linear;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="prog"></div>
+
+<header class="site">
+  <div class="wrap inner">
+    <a href="../RegNavi LP.html" class="brand">
+      <span class="mark">R<em>eg</em>Navi</span>
+      <span class="sub">by DAY1, Inc.</span>
+    </a>
+    <nav class="nav">
+      <a href="../RegNavi LP.html#trust">DAY1について</a>
+      <a href="../RegNavi LP.html#service">サービス</a>
+      <a href="../RegNavi LP.html#deliv">納品物</a>
+      <a href="../RegNavi LP.html#price">料金</a>
+      <a href="./index.html" class="active">導入事例</a>
+      <a href="../RegNavi LP.html#faq">FAQ</a>
+      <a href="../RegNavi LP.html#contact" class="btn primary">無料トライアル →</a>
+    </nav>
+  </div>
+</header>
+
+<section class="article-hero">
+  <div class="wrap">
+    <div class="crumbs">
+      <a href="../RegNavi LP.html">TOP</a><span class="sep">／</span>
+      <a href="./index.html">CASE STUDIES</a><span class="sep">／</span>
+      CASE 01
+    </div>
+
+    <div class="a-meta-row">
+      <span class="num">CASE 01</span>
+      <span class="sep">／</span>
+      <span class="tag">INTERVIEW</span>
+      <span class="tag">単棟型</span>
+      <span class="tag">規約改正</span>
+      <span class="sep">／</span>
+      <span>2026.04.23</span>
+      <span class="sep">／</span>
+      <span>READ 8 MIN</span>
+    </div>
+
+    <h1>「担当者1人で1棟1週間」の<br>常識を、数日に圧縮できた理由。</h1>
+
+    <p class="deck">
+      令和7年の標準管理規約改正。条番号のズレ、強行規定の漏れ、無償慣行による負荷——。
+      長年「人の手」で支えてきた業務を、AIと外注体制で再定義する。良品総合管理株式会社が
+      RegNaviと歩んだ、規約改正BPOの記録。
+    </p>
+
+    <div class="a-info">
+      <div class="i"><div class="k">Client</div><div class="v">良品総合管理株式会社</div></div>
+      <div class="i"><div class="k">Industry</div><div class="v">マンション管理 ／ 不動産</div></div>
+      <div class="i"><div class="k">Scope</div><div class="v">管理規約改正BPO</div></div>
+      <div class="i"><div class="k">Status</div><div class="v">2026年4月 本発注</div></div>
+    </div>
+
+    <div class="lead-image" style="display:none"></div>
+  </div>
+</section>
+
+<article class="body">
+  <!-- LEFT TOC -->
+  <aside class="toc">
+    <div class="label">CONTENTS</div>
+    <ol>
+      <li><a href="#s1"><span class="n">01</span><span>規約改正という重荷</span></a></li>
+      <li><a href="#s2"><span class="n">02</span><span>RegNaviとの出会い</span></a></li>
+      <li><a href="#s3"><span class="n">03</span><span>導入後の変化</span></a></li>
+      <li><a href="#s4"><span class="n">04</span><span>これから</span></a></li>
+    </ol>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="prose">
+    <p class="lead">
+      管理規約は、マンションという「区分所有」の生活を成り立たせる土台である。だからこそ、
+      その改正は管理会社の業務の中でも特に神経を使う仕事だ。条文の整合性、議事の段取り、
+      区分所有者への説明——。これまで数日、ときに1週間以上を費やしてきた仕事の輪郭が、
+      いま少しずつ変わりはじめている。
+    </p>
+
+    <div class="speakers" style="grid-template-columns:1fr;max-width:480px;">
+      <div class="speaker">
+        <div class="avatar"><img src="../assets/ryohin-logo.png" alt="" style="width:100%;height:100%;object-fit:contain;padding:6px;background:#fff;" /></div>
+        <div>
+          <div class="role">CLIENT</div>
+          <div class="name">良品総合管理株式会社</div>
+          <div class="org">フロント担当者・管理部門</div>
+        </div>
+      </div>
+    </div>
+
+    <h2 id="s1" data-num="01 ／ BACKGROUND">規約改正という、重荷。</h2>
+
+    <p>
+      令和7年の標準管理規約改正は、業界全体に静かな緊張をもたらした。電子総会、第三者管理、
+      ペット飼育など、論点は多岐にわたる。良品総合管理が抱えるのは、単棟型から団地型まで、
+      築年数も体制もばらばらの物件群だった。
+    </p>
+
+    <h3>「条番号がひとつズレるだけで、半日が消える」</h3>
+
+    <div class="qa">
+      <div class="qline"><span class="label">Q.</span><span class="text">RegNavi導入前は、規約改正にどのくらい時間がかかっていましたか？</span></div>
+      <div class="aline"><span class="label">A.</span><span class="text">物件の状態にもよりますが、<strong>1棟あたり1週間ほどはフロント担当が拘束されていました</strong>。新旧対照表をExcelで作って、条番号のズレを目視で追って——。手戻りが発生すると、また半日が消える。それを物件数ぶん繰り返すわけです。</span></div>
+    </div>
+
+    <div class="qa">
+      <div class="qline"><span class="label">Q.</span><span class="text">特に負担に感じていた工程はありますか？</span></div>
+      <div class="aline"><span class="label">A.</span><span class="text">圧倒的に<strong>新旧対照表の作成と条番号の整合チェック</strong>です。標準規約に合わせるか、現行を残すか、その判断は私たち管理会社の仕事として残るのですが、その判断の前段にある「下準備」に時間がかかりすぎていた。</span></div>
+    </div>
+
+    <div class="pullquote">
+      <p class="text">「規約改正の作業は、専門性が高いのに、属人的になりがちで、しかも対外的には“当たり前にできて当然”と見られる。本当に報われにくい仕事だったんです」</p>
+      <div class="who">良品総合管理株式会社 ／ フロント担当者</div>
+    </div>
+
+    <h2 id="s2" data-num="02 ／ ENCOUNTER">RegNaviとの出会い。</h2>
+
+    <p>
+      きっかけは、別件での雑談だった。動画支援で関わっていたDAY1代表の飯田氏に、何気なく
+      「規約改正がきつい」とこぼしたことから話は始まる。
+    </p>
+
+    <h3>「これは、AIと外注で構造的に解ける」</h3>
+
+    <div class="qa">
+      <div class="qline"><span class="label">Q.</span><span class="text">最初にRegNaviの構想を聞いたとき、どう思いましたか？</span></div>
+      <div class="aline"><span class="label">A.</span><span class="text">正直、半信半疑でした。<strong>規約はテンプレで作れる類のものではない</strong>と思っていたので。ただ、「AIに条番号や参照エラーの検出をやらせて、判断は人がやる」という分担の話を聞いて、これは現場感覚に合っているなと。</span></div>
+    </div>
+
+    <div class="qa">
+      <div class="qline"><span class="label">Q.</span><span class="text">トライアルではどんなことを確認しましたか？</span></div>
+      <div class="aline"><span class="label">A.</span><span class="text">手元にあった単棟型1棟を題材に、現行規約をPDFで送るところから始めました。<strong>2営業日で改正規約・新旧対照表・議案書・説明文の4点が返ってきて</strong>、まず納品スピードに驚きました。次に、新旧対照表が3列構成（標準／現行／改正後）になっていて、これがそのまま社内レビューに使える形だった。</span></div>
+    </div>
+
+    <h2 id="s3" data-num="03 ／ AFTER">導入後の変化。</h2>
+
+    <p>
+      トライアルから本発注へと進んだ2026年4月以降、業務フローには段階的な変化が起きている。
+      もっとも大きな変化は「担当者が判断業務に集中できるようになった」点だという。
+    </p>
+
+    <h3>担当者は、判断と説明に集中する</h3>
+
+    <div class="qa">
+      <div class="qline"><span class="label">Q.</span><span class="text">RegNavi導入で、現場の働き方はどう変わりましたか？</span></div>
+      <div class="aline"><span class="label">A.</span><span class="text">これが一番大きな変化なのですが、<strong>「下地を作る人」と「判断する人」が分かれた</strong>。下地はRegNaviが作る。私たちは「この物件では、ここを標準に合わせる／ここは残す」という判断と、区分所有者への説明に時間を使えるようになりました。</span></div>
+    </div>
+
+    <div class="qa">
+      <div class="qline"><span class="label">Q.</span><span class="text">経営の観点では、どんなメリットを感じていますか？</span></div>
+      <div class="aline"><span class="label">A.</span><span class="text">これまで規約改正は「無償でやって当然」という空気がありました。でも実際には数十時間の工数がかかる。RegNaviは1棟50,000円ですから、<strong>原価が見える化されたことで、社内でこの業務の価値を語れるようになった</strong>。これは想定していなかった効果です。</span></div>
+    </div>
+
+    <div class="pullquote">
+      <p class="text">「条番号のズレを目視で追っていた頃には、もう戻れません。AIで一気に下地ができて、私たちは判断と区分所有者への説明に集中できるようになりました」</p>
+      <div class="who">良品総合管理株式会社 ／ フロント担当者</div>
+    </div>
+
+    <h2 id="s4" data-num="04 ／ NEXT">これから。</h2>
+
+    <p>
+      良品総合管理では、RegNaviの活用範囲を段階的に広げていく方針だ。単棟型での実績を踏まえ、
+      団地型・複合用途型での適用や、議事録ベースでの別表・使用細則の整備にも取り組む予定だという。
+    </p>
+
+    <div class="qa">
+      <div class="qline"><span class="label">Q.</span><span class="text">同業他社の管理会社にRegNaviをすすめるとしたら、どんな点を伝えますか？</span></div>
+      <div class="aline"><span class="label">A.</span><span class="text">「規約改正がきつい」と思っている会社は、まず<strong>初回無料の1棟をやってみてほしい</strong>。説明より、納品物を見たほうが早い。3列の対照表と議案書ドラフトを実際に手にすると、これまでの自社の作業がいかに非効率だったかが分かります。</span></div>
+    </div>
+
+    <div class="end-mark">END OF INTERVIEW</div>
+
+    <p style="font-size:13px;color:var(--ink-3);text-align:center;margin-bottom:0;">
+      ※ 本インタビューは取材時点での内容です。記事内容は実際の発言を編集の上、構成しています。
+    </p>
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <aside class="side">
+    <div class="card">
+      <h4>CLIENT FACT</h4>
+      <ul>
+        <li>業種：マンション管理</li>
+        <li>所在：—</li>
+        <li>RegNavi導入：2026年4月</li>
+        <li>契約形態：本発注</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>KEY NUMBERS</h4>
+      <div class="stat">1週間</div>
+      <div class="stat-label">→ 数日以内に短縮</div>
+      <div class="stat" style="margin-top:24px;">¥50,000</div>
+      <div class="stat-label">／ 棟（標準プラン・税別）</div>
+      <div class="stat" style="margin-top:24px;">4点</div>
+      <div class="stat-label">セットでの納品物</div>
+    </div>
+    <div class="card">
+      <h4>SHARE</h4>
+      <ul>
+        <li>URLをコピー</li>
+        <li>X (旧Twitter) でシェア</li>
+        <li>Facebook でシェア</li>
+      </ul>
+    </div>
+  </aside>
+</article>
+
+<section class="article-cta">
+  <div class="wrap inner">
+    <div>
+      <h3>あなたの管理物件でも、まず1棟。</h3>
+      <p>初回1棟は無料でお試しいただけます（2026年5月末まで／単棟型マンション）</p>
+    </div>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScX9mXAQLRg6wqdAtJWVq4LPLi6TXieKSCuEpRd-bscceHJ_Q/viewform?usp=dialog" target="_blank" rel="noopener" class="btn primary">無料トライアルを申し込む →</a>
+  </div>
+</section>
+
+<section class="related">
+  <div class="wrap">
+    <a href="./index.html" class="back-link">CASE STUDIES 一覧へ戻る</a>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap row">
+    <div class="brand">
+      <span class="mark">R<em>eg</em>Navi</span>
+      <span class="sub" style="margin-left:10px;">by DAY1, Inc.</span>
+    </div>
+    <div class="meta">
+      <a href="https://day1deyoutube.com/company/" target="_blank" rel="noopener">会社概要</a>
+      © 2026 DAY1, Inc. ／ info@web-day1.com
+    </div>
+  </div>
+</footer>
+
+<script>
+  // progress bar
+  const prog = document.getElementById('prog');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const ratio = h.scrollTop / Math.max(1, (h.scrollHeight - h.clientHeight));
+    prog.style.width = (ratio * 100) + '%';
+  });
+  // smooth anchor
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const t = document.querySelector(id);
+        if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
+      }
+    });
+  });
+</script>
+</body>
+</html>
